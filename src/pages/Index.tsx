@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SolarSystem from '../components/SolarSystem';
 import PlanetControls from '../components/PlanetControls';
 import ConfigurationPanel from '../components/ConfigurationPanel';
-import { saveConfiguration } from '../utils/firebase';
+import { saveConfiguration, getAllConfigurations } from '../utils/firebase';
 import defaultPlanetData from '../utils/planetData';
 import { ChevronLeft, ChevronRight, Info, Settings } from 'lucide-react';
 
@@ -24,18 +24,25 @@ const Index = () => {
     );
   };
   
-  const handleSaveConfiguration = async (name) => {
+  const handleSaveConfiguration = async () => {
     setSavingStatus('saving');
+  
     try {
-      const result = await saveConfiguration(name, planetData);
+      // Step 1: Fetch existing configurations
+      const { configurations } = await getAllConfigurations(); // Fetch configs
+  
+      // Step 2: Determine the next config number
+      const configNumber = configurations.length + 1;
+      const configName = `myconfig${configNumber}`;
+  
+      console.log("Saving Configuration with Name:", configName); // Debugging log
+  
+      // Step 3: Save configuration with new name
+      const result = await saveConfiguration(configName, planetData);
+  
       if (result.success) {
         setSavingStatus('success');
-        
-        // Reset status after a delay
-        setTimeout(() => {
-          setSavingStatus('idle');
-        }, 2000);
-        
+        setTimeout(() => setSavingStatus('idle'), 2000);
         return result;
       } else {
         setSavingStatus('error');
@@ -68,12 +75,7 @@ const Index = () => {
         </div>
         
         <div className="flex space-x-2">
-          <button 
-            className="button-secondary"
-            onClick={() => setShowInfo(!showInfo)}
-          >
-            <Info size={18} />
-          </button>
+          
           <button 
             className="button-secondary"
             onClick={() => setShowControls(!showControls)}
@@ -98,7 +100,7 @@ const Index = () => {
           setSelectedPlanet={setSelectedPlanet}
           updatePlanetProperty={updatePlanetProperty}
           savingStatus={savingStatus}
-          onSaveConfiguration={() => setShowInfo(true)}
+          onSaveConfiguration={handleSaveConfiguration}
         />
         
         <ConfigurationPanel 
@@ -128,7 +130,7 @@ const Index = () => {
       </div>
       
       {/* Info Modal */}
-      {showInfo && (
+      {/* {showInfo && (
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-20 flex items-center justify-center p-4">
           <div className="glass-panel max-w-md p-6 animate-scale-in">
             <h2 className="text-xl font-medium mb-4">Save Your Solar System</h2>
@@ -153,7 +155,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

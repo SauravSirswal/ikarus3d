@@ -43,7 +43,7 @@ const SolarSystem = ({ planetData, selectedPlanet, setSelectedPlanet }) => {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = 0.7;
-    controls.zoomSpeed = 0.8;
+    controls.zoomSpeed = 1.8;
     controls.minDistance = 20;
     controls.maxDistance = 150;
     controlsRef.current = controls;
@@ -298,7 +298,7 @@ const SolarSystem = ({ planetData, selectedPlanet, setSelectedPlanet }) => {
       
       // If not the sun, orbit around the sun
       if (planet.id !== "sun") {
-        const angle = time * planet.orbitSpeed;
+        const angle = time * planet.orbitSpeed * 30;
         planetMesh.position.x = Math.cos(angle) * planet.orbitDistance;
         planetMesh.position.z = Math.sin(angle) * planet.orbitDistance;
       }

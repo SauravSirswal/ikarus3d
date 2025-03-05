@@ -2,14 +2,14 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, getDocs, doc, getDoc } from 'firebase/firestore';
 
-// Your web app's Firebase configuration - Replace with your own config
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY", // ⚠️ Replace with your Firebase API key
-  authDomain: "YOUR_AUTH_DOMAIN", // ⚠️ Replace with your Firebase auth domain
-  projectId: "YOUR_PROJECT_ID", // ⚠️ Replace with your Firebase project ID
-  storageBucket: "YOUR_STORAGE_BUCKET", // ⚠️ Replace with your Firebase storage bucket
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // ⚠️ Replace with your Firebase messaging sender ID
-  appId: "YOUR_APP_ID" // ⚠️ Replace with your Firebase app ID
+  apiKey: "AIzaSyCaEp6fBFa_RBIx6Xz1sAM2SYoMHkdiNH8",
+  authDomain: "d-solar-system-4e423.firebaseapp.com",
+  projectId: "d-solar-system-4e423",
+  storageBucket: "d-solar-system-4e423.appspot.com",
+  messagingSenderId: "610301362623",
+  appId: "1:610301362623:web:e92b3f6c0e6c0f2ba8610a",
+  measurementId: "G-WGLQ9114GM"
 };
 
 // Initialize Firebase

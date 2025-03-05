@@ -158,7 +158,7 @@ const PlanetControls = ({
       <div className="mt-5 pt-4 border-t border-white/10">
         <button 
           className="button-primary w-full"
-          onClick={onSaveConfiguration}
+          onClick={() => onSaveConfiguration("My Custom Config")}
           disabled={savingStatus === 'saving'}
         >
           <Save size={16} />
